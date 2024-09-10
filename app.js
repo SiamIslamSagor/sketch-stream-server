@@ -4,6 +4,8 @@ import express from "express";
 import { errorMiddleware } from "./middlewares/error.js";
 import { connectDB } from "./utils/features.js";
 
+import userRoute from "./routes/user.js";
+
 dotenv.config({
   path: "./.env",
 });
@@ -19,14 +21,13 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.send("Hello World from SketchStream Server!");
 });
 
-app.get("/about", (req, res) => {
-  res.send("About route 🎉 ");
-});
+// user route
+app.use("/user", userRoute);
 
-// custom error middleware
+// custom error middleware, this middleware must be used on the bottom of file
 app.use(errorMiddleware);
 
 app.listen(PORT, () => {
