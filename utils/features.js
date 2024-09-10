@@ -19,7 +19,11 @@ const connectDB = uri => {
       );
     })
     .catch(err => {
-      console.log("Failed to connect SketchStream DB");
+      console.log(
+        "Failed to connect SketchStream DB, URI: ",
+        process.env.MONGO_URI,
+        ":URI END"
+      );
       console.log(
         "Something is wrong, when connecting with SketchStream DB:",
         err
