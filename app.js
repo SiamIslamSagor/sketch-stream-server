@@ -13,9 +13,7 @@ dotenv.config({
 const mongoURI = process.env.MONGO_URI;
 const PORT = process.env.PORT || 5000;
 
-connectDB(
-  `mongodb+srv://SketchStream:xhsRUQxkgFzUeTow@cluster0.e9we0w0.mongodb.net`
-);
+connectDB(mongoURI);
 
 const app = express();
 
