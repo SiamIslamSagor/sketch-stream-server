@@ -13,7 +13,9 @@ dotenv.config({
 const mongoURI = process.env.MONGO_URI;
 const PORT = process.env.PORT || 5000;
 
-connectDB(mongoURI);
+connectDB(
+  `mongodb+srv://SketchStream:xhsRUQxkgFzUeTow@cluster0.e9we0w0.mongodb.net`
+);
 
 const app = express();
 
@@ -22,6 +24,7 @@ app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.send("Hello World from SketchStream Server!");
+  // console.log("start:", mongoURI, ":end");
 });
 
 // user route
