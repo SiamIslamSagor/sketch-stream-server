@@ -46,9 +46,11 @@ const getMyProfile = TryCatch(async (req, res) => {
 });
 
 const logout = TryCatch(async (req, res) => {
+  const options = { ...cookieOptions, maxAge: 0 };
+  console.log(options);
   return res
     .status(200)
-    .clearCookie("access-token", { ...cookieOptions, maxAge: 0 })
+    .clearCookie("access-token", options)
     .json({ success: true, message: "Logged out successfully" });
 });
 
