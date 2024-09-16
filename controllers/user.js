@@ -56,7 +56,7 @@ const logout = TryCatch(async (req, res) => {
   return res
     .status(200)
     .clearCookie("access-token", options)
-    .json({ success: true, message: "Logged out successfully" });
+    .json({ success: true, message: "Logged out successfully", options });
 });
 
 export { getMyProfile, login, logout, newUser };
