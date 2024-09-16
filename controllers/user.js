@@ -52,13 +52,11 @@ const logout = TryCatch(async (req, res) => {
     expires: new Date(0),
     path: "/",
   };
-  const token = "xxx";
   console.log(options);
-  return res.status(200).clearCookie("access-token", options).json({
+  res.status(200).clearCookie("access-token", options).json({
     success: true,
     message: "Logged out successfully",
     options,
-    token,
   });
 });
 
