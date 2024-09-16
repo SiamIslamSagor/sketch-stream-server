@@ -53,10 +53,11 @@ const logout = TryCatch(async (req, res) => {
     path: "/",
   };
   console.log(options);
-  return res
-    .status(200)
-    .clearCookie("access-token", options)
-    .json({ success: true, message: "Logged out successfully", options });
+  return res.status(200).cookie("access-token", "xxx", options).json({
+    success: true,
+    message: "Logged out successfully",
+    options,
+  });
 });
 
 export { getMyProfile, login, logout, newUser };
