@@ -1,18 +1,35 @@
 import { TryCatch } from "../middlewares/error.js";
 import { Drawing } from "../models/drawing.model.js";
 
-export const createDrawing = TryCatch(async (req, res, next) => {
-  const drawing = new Drawing(req.body);
-  await drawing.save();
-  res.status(201).json(drawing);
+const createDrawing = TryCatch(async (req, res, next) => {
+  const data = req.body;
+  const drawingData = {
+    title: "my drawing",
+    lines: data.lines.map(line => JSON.parse(line)),
+    straightLines: data.straightLines.map(line => JSON.parse(line)),
+    rectangles: data.rectangles.map(rect => JSON.parse(rect)),
+    circles: data.circles.map(circle => JSON.parse(circle)),
+    ellipses: data.ellipses.map(ellipse => JSON.parse(ellipse)),
+    squares: data.squares.map(square => JSON.parse(square)),
+    texts: data.texts.map(text => ({ ...text })),
+  };
+
+  // save the drawing data
+  const drawing = await Drawing.create(drawingData);
+
+  res.status(201).json({
+    success: true,
+    message: "Drawing saved successfully",
+    drawing,
+  });
 });
 
-export const getDrawings = TryCatch(async (req, res, next) => {
+const getDrawings = TryCatch(async (req, res, next) => {
   const drawings = await Drawing.find();
   res.json(drawings);
 });
 
-export const getDrawing = TryCatch(async (req, res, next) => {
+const getDrawing = TryCatch(async (req, res, next) => {
   const drawing = await Drawing.findById(req.params.id);
   if (!drawing) {
     res.status(404).json({ message: "Drawing not found" });
@@ -21,7 +38,7 @@ export const getDrawing = TryCatch(async (req, res, next) => {
   }
 });
 
-export const updateDrawing = TryCatch(async (req, res, next) => {
+const updateDrawing = TryCatch(async (req, res, next) => {
   const drawing = await Drawing.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
   });
@@ -32,7 +49,7 @@ export const updateDrawing = TryCatch(async (req, res, next) => {
   }
 });
 
-export const deleteDrawing = TryCatch(async (req, res, next) => {
+const deleteDrawing = TryCatch(async (req, res, next) => {
   await Drawing.findByIdAndRemove(req.params.id);
   res.status(204).json({ message: "Drawing deleted" });
 });

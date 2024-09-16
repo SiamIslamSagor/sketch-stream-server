@@ -6,6 +6,7 @@ import { errorMiddleware } from "./middlewares/error.js";
 import { connectDB } from "./utils/features.js";
 
 import userRoute from "./routes/user.js";
+import drawingRoute from "./routes/drawing.js";
 
 dotenv.config({
   path: "./.env",
@@ -37,6 +38,7 @@ app.get("/", (req, res) => {
 
 // user route
 app.use("/user", userRoute);
+app.use("/drawing", drawingRoute);
 
 // custom error middleware, this middleware must be used on the bottom of file
 app.use(errorMiddleware);
