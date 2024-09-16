@@ -6,6 +6,7 @@ const cookieOptions = {
   sameSite: "none",
   httpOnly: true,
   secure: true,
+  path: "/",
 };
 
 const connectDB = uri => {

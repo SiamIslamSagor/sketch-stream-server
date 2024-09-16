@@ -46,7 +46,7 @@ const getMyProfile = TryCatch(async (req, res) => {
 });
 
 const logout = TryCatch(async (req, res) => {
-  const options = { ...cookieOptions, maxAge: 0 };
+  const options = { ...cookieOptions, maxAge: 0, path: "/" };
   console.log(options);
   return res
     .status(200)
