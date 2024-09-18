@@ -31,7 +31,7 @@ const login = TryCatch(async (req, res, next) => {
 
   if (!isPasswordMatched)
     return next(new ErrorHandler("Invalid Username or Password", 404));
-
+  console.log("next: send token");
   sendToken(res, user, 200, `Welcome Back, ${user.name}!`);
 });
 
@@ -49,7 +49,7 @@ const logout = TryCatch(async (req, res) => {
   const options = {
     ...cookieOptions,
     maxAge: 0,
-    expires: new Date(0),
+    // expires: new Date(0),
     path: "/",
   };
   console.log(options);

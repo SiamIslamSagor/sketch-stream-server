@@ -5,9 +5,7 @@ const cookieOptions = {
   maxAge: 15 * 24 * 60 * 60 * 1000, // 15 days
   sameSite: "none",
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production", // Only secure in production
-  path: "/",
-  domain: ".vercel.app",
+  secure: true,
 };
 
 const connectDB = uri => {
@@ -36,10 +34,11 @@ const connectDB = uri => {
 
 const sendToken = (res, user, code, message) => {
   const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
-
+  console.log("inside send token");
   return res.status(code).cookie("access-token", token, cookieOptions).json({
     success: true,
     message,
+    tokenSend: true,
   });
 };
 
