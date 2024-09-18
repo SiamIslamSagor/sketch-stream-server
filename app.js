@@ -19,7 +19,7 @@ connectDB(mongoURI);
 
 const app = express();
 
-app.use(
+/* app.use(
   cors({
     origin: [
       "http://localhost:5173",
@@ -27,7 +27,13 @@ app.use(
     ],
     credentials: true,
   })
-);
+); */
+const corsOptions = {
+  origin: ["https://sketch-stream-client.vercel.app", "http://localhost:5173"], // Allowed origins
+  credentials: true, // Enable sending cookies
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
