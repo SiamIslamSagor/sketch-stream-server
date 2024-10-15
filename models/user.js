@@ -17,6 +17,10 @@ const schema = new Schema(
       required: true,
       select: false,
     },
+    photoURL: {
+      type: String,
+      required: "Photo URL can't be empty",
+    },
   },
   {
     timestamps: true,

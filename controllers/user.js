@@ -6,7 +6,7 @@ import { ErrorHandler } from "../utils/utility.js";
 
 // Create a new user and save it to the database and save in cookie
 const newUser = async (req, res) => {
-  const { name, username, password } = req.body;
+  const { name, username, password, photoURL } = req.body;
 
   console.log("Hello:", req.body);
 
@@ -14,6 +14,7 @@ const newUser = async (req, res) => {
     name,
     username,
     password,
+    photoURL,
   });
 
   sendToken(res, user, 201, "User Created!");
@@ -49,7 +50,8 @@ const logout = TryCatch(async (req, res) => {
   const options = {
     ...cookieOptions,
     maxAge: 0,
-    // expires: new Date(0),
+    secure: process.env.NODE_ENV === "production" ? true : false,
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
     path: "/",
   };
   console.log(options);
