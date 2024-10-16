@@ -42,11 +42,18 @@ const connectDB = uri => {
 const sendToken = (res, user, code, message) => {
   const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
   console.log("inside send token");
-  return res.status(code).cookie("access-token", token, cookieOptions).json({
-    success: true,
-    message,
-    tokenSend: true,
-  });
+  return res
+    .status(code)
+    .cookie("access-token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+    })
+    .json({
+      success: true,
+      message,
+      tokenSend: true,
+    });
 };
 
 export { connectDB, sendToken, cookieOptions };
