@@ -38,7 +38,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.get("/", (req, res) => {
-  res.send("Hello World from SketchStream Server!! brooh!");
+  res.send("Hello World from SketchStream Server!!");
   // console.log("start:", mongoURI, ":end");
 });
 
