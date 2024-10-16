@@ -9,6 +9,17 @@ const errorMiddleware = (err, req, res, next) => {
   });
 };
 
+/* // HOC:
+function TryCatch(fun) {
+  return async function (req, res, next) {
+    try {
+      
+    } catch (error) {
+      
+    }
+  };
+} */
+
 const TryCatch = passedFunc => async (req, res, next) => {
   try {
     await passedFunc(req, res, next);

@@ -47,21 +47,12 @@ const getMyProfile = TryCatch(async (req, res) => {
 });
 
 const logout = TryCatch(async (req, res) => {
-  // const options = {
-  //   ...cookieOptions,
-  //   maxAge: 0,
-  //   secure: process.env.NODE_ENV === "production" ? true : false,
-  //   sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
-  //   path: "/",
-  // };
-  // console.log(options);
   res
     .status(200)
     .clearCookie("access-token", { maxAge: 0, sameSite: "none", secure: true })
     .json({
       success: true,
       message: "Logged out successfully",
-      options,
     });
 });
 
