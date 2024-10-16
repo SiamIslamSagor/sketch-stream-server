@@ -51,7 +51,7 @@ const logout = TryCatch(async (req, res) => {
     .status(200)
     .cookie("access-token", "null", {
       maxAge: 0,
-      sameSite: "none",
+      sameSite: "strict",
       secure: true,
     })
     .json({
