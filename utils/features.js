@@ -9,7 +9,7 @@ import jwt from "jsonwebtoken";
 }; */
 
 const cookieOptions = {
-  maxAge: 15 * 24 * 60 * 60 * 1000, // 15 days
+  // maxAge: 15 * 24 * 60 * 60 * 1000, // 15 days
   httpOnly: true,
   secure: process.env.NODE_ENV === "production",
   sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
