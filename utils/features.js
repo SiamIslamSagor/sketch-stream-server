@@ -1,11 +1,18 @@
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 
-const cookieOptions = {
+/* const cookieOptions = {
   maxAge: 15 * 24 * 60 * 60 * 1000, // 15 days
   sameSite: "none",
   httpOnly: true,
   secure: true,
+}; */
+
+const cookieOptions = {
+  // maxAge: 15 * 24 * 60 * 60 * 1000, // 15 days
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
 };
 
 const connectDB = uri => {
