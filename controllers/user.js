@@ -49,11 +49,25 @@ const getMyProfile = TryCatch(async (req, res) => {
 const logout = TryCatch(async (req, res) => {
   res
     .status(200)
-    .clearCookie("access-token", { maxAge: 0, sameSite: "none", secure: true })
+    .cookie("access-token", "null", {
+      maxAge: 0,
+      sameSite: "none",
+      secure: true,
+    })
     .json({
       success: true,
       message: "Logged out successfully",
     });
 });
+/* 
+const logout = TryCatch(async (req, res) => {
+  res
+    .status(200)
+    .clearCookie("access-token", { maxAge: 0, sameSite: "none", secure: true })
+    .json({
+      success: true,
+      message: "Logged out successfully",
+    });
+}); */
 
 export { getMyProfile, login, logout, newUser };
